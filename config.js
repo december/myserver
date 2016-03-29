@@ -2,13 +2,13 @@ module.exports = {
   secret: 'secret',
   port: 7004,
   corp: {
-    token: 'YOUR token',
-    encodingAESKey: 'YOUR encodingAESKey',
-    corpId: 'YOUR corpId'
+    token: 'thuber2016',
+    encodingAESKey: 'wjsu9U1frpPXcruhstuH0bB9alrHKBKEGwrw0xX68AC',
+    corpId: 'gh_1c05d6fc17c6'
   },
   mp: {
-    appid: 'your appid',
-    token: 'your token',
-    encodingAESKey: 'YOUR encodingAESKey'
+    appid: 'gh_1c05d6fc17c6',
+    token: 'thuber2016',
+    encodingAESKey: 'wjsu9U1frpPXcruhstuH0bB9alrHKBKEGwrw0xX68AC'
   }
 };
