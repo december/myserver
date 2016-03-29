@@ -41,79 +41,58 @@ exports.reply = wechat(config.mp, wechat.text(function (message, req, res) {
     return;
   }
 
-  if (input === '大王') {
-    return res.reply("不要叫我大王，要叫我女王大人啊……");
+  if (input === '我要注册') {
+    return res.reply("为了快递们的安全，我们需要验证您的身份，请回复我们以下信息：“你的姓名＋院系＋学号＋手机号”，并把您的学生证照片发给我们，我们会好好保护您的隐私的！");
   }
+  if (input === '需要帮助') {
+    return res.reply("亲，别着急，“THU咻不”来帮您啦！快快回复您快递的基本信息吧：“所取快递重量（重or不重）+体积（大or不大）+投放目的地（具体宿舍楼号以及单元门号）”
+");
+  }
+  if (input === '提供帮助') {
+    return res.reply("哇塞！亲，您真是一个乐于助人的好青年！\n欢迎使用“THU咻不”！麻烦您回复可以提供帮助的时间区间，格式例如7:00-8:00或者13:00-16:00，您辛苦啦！我们将尽快为您匹配代取快递啦！");
+  }
+  if (input === '已投放') {
+    return res.reply("予人玫瑰，手有余香！\n感谢您的帮助，您的好人费将在对方用户确认快递之后存入“钱包”当中哈！\n希望“THU咻不”的服务您能满意！爱你呦，下次再见！！");
+  }
+  if (input === '刘建平') {
+    return res.reply("什么时候发演出的票！");
+  }
+  if (input === '杨凯杰') {
+    return res.reply("比宋仲基帅多了！");
+  }
+  if (input === '游伊慧') {
+    return res.reply("不让我们取冰箱我们还能做朋友。");
+  }
+  if (input === '韩勇') {
+    return res.reply("给一块钱就愿意帮人取快递的好青年。");
+  }
+  if (input === '路云飞') {
+    return res.reply("赶紧祝我答辩顺利。")
+  };
   if (input.length < 2) {
-    return res.reply('内容太少，请多输入一点:)');
+    return res.reply('能不能跟我说完整的句子呢～');
   }
   var data = alpha.search(input);
-  var content = '';
-  switch (data.status) {
-  case 'TOO_MATCHED':
-    content = '找到API过多，请精确一点：\n' + data.result.join(', ').substring(0, 100) + '...';
-    break;
-  case 'MATCHED':
-    content = data.result.map(function (item) {
-      var replaced = (item.desc || '')
-        .replace(/<p>/ig, '').replace(/<\/p>/ig, '')
-        .replace(/<code>/ig, '').replace(/<\/code>/ig, '')
-        .replace(/<pre>/ig, '').replace(/<\/pre>/ig, '')
-        .replace(/<strong>/ig, '').replace(/<\/strong>/ig, '')
-        .replace(/<ul>/ig, '').replace(/<\/ul>/ig, '')
-        .replace(/<li>/ig, '').replace(/<\/li>/ig, '')
-        .replace(/<em>/ig, '').replace(/<\/em>/ig, '')
-        .replace(/&#39;/ig, "'");
-
-      return {
-        title: item.path,
-        description: item.textRaw + ':\n' + replaced,
-        picurl: config.domain + '/assets/qrcode.jpg',
-        url: config.domain + '/detail?id=' + item.hash
-      };
-    });
-    if (data.more && data.more.length) {
-      content.push({
-        title: '更多：' + data.more.join(', ').substring(0, 200) + '...',
-        description: data.more.join(', ').substring(0, 200) + '...',
-        picurl: config.domain + '/assets/qrcode.jpg',
-        url: config.domain + '/404'
-      });
-    }
-    break;
-  default:
-    res.wait('view');
-    return;
-    break;
-  }
   var from = message.FromUserName;
-  if (!Array.isArray(content)) {
-    if (from === 'oPKu7jgOibOA-De4u8J2RuNKpZRw') {
-      content = '主人你好：\n' + content;
-    }
-    if (from === 'oPKu7jpSY1tD1xoyXtECiM3VXzdU') {
-      content = '女王大人:\n' + content;
-    }
-  }
   console.log(content);
   res.reply(content);
 }).image(function (message, req, res) {
   console.log(message);
-  res.reply('还没想好图片怎么处理啦。');
+  res.reply('恭喜您注册成功！我们会尽快为您审核！');
 }).location(function (message, req, res) {
   console.log(message);
-  res.reply('想和我约会吗，不要的啦。');
+  res.reply('已经收到您发送的位置～');
 }).voice(function (message, req, res) {
   console.log(message);
-  res.reply('心情不好，不想搭理你。');
+  res.reply('让我说话是要收费的。');
 }).link(function (message, req, res) {
   console.log(message);
-  res.reply('点连接进来的是吧！');
+  res.reply('这个链接好奇怪……');
 }).event(function (message, req, res) {
   console.log(message);
   if (message.Event === 'subscribe') {
     // 用户添加时候的消息
-    res.reply('谢谢添加Node.js公共帐号:)\n回复Node.js API相关关键词，将会得到相关描述。如：module, setTimeout等');
+    res.reply('啊哈，欢迎关注“THU咻不”！:)\n有了我们你就再也不怕没时间取快递啦！你也通过可以帮助别人来赚笔小钱哦！快快点击下方的“我要注册”加入我们吧！');
   } else if (message.Event === 'unsubscribe') {
     res.reply('Bye!');
   } else {
