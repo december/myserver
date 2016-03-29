@@ -1,6 +1,6 @@
 module.exports = {
   secret: 'secret',
-  port: 7004,
+  port: 80,
   corp: {
     token: 'thuber2016',
     encodingAESKey: 'wjsu9U1frpPXcruhstuH0bB9alrHKBKEGwrw0xX68AC',
