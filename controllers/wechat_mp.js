@@ -69,8 +69,8 @@ exports.reply = wechat(config.mp, wechat.text(function (message, req, res) {
   if (input.length < 2) {
     return res.reply('能不能跟我说完整的句子呢～');
   }
-  else{
-    return res.reply('抱歉，我听不懂！')
+  else  {
+    return res.reply('抱歉，我听不懂！');
   }
   var data = alpha.search(input);
   var from = message.FromUserName;
