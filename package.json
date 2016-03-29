@@ -1,0 +1,31 @@
+{
+  "name": "api_doc_service",
+  "version": "0.0.1",
+  "description": "ERROR: No README.md file found!",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/JacksonTian/api-doc-service.git"
+  },
+  "dependencies": {
+    "alpha": "0.0.8",
+    "connect": "2.8.4",
+    "pm": "*",
+    "wechat": "1.0.1",
+    "wechat-enterprise": "0.0.5",
+    "ejs": "1.0.0"
+  },
+  "author": "Jackson Tian",
+  "license": "MIT",
+  "readmeFilename": "README.md",
+  "devDependencies": {},
+  "keywords": [
+    "Node",
+    "API",
+    "Documentation",
+    "Service"
+  ]
+}
