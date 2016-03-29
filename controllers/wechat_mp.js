@@ -12,9 +12,7 @@ var oauth = new wechat.OAuth(config.appid, config.appsecret);
 
 var List = require('wechat').List;
 List.add('view', [
-  ['没有找到相关API。输入模块名，方法名，事件名等都能获取到相关内容。\n回复{a}可以查看近期的NodeParty活动', function (info, req, res) {
-    res.nowait('暂无活动');
-  }]
+  ['抱歉，我听不懂！']
 ]);
 
 
@@ -45,8 +43,7 @@ exports.reply = wechat(config.mp, wechat.text(function (message, req, res) {
     return res.reply("为了快递们的安全，我们需要验证您的身份，请回复我们以下信息：“你的姓名＋院系＋学号＋手机号”，并把您的学生证照片发给我们，我们会好好保护您的隐私的！");
   }
   if (input === '需要帮助') {
-    return res.reply("亲，别着急，“THU咻不”来帮您啦！快快回复您快递的基本信息吧：“所取快递重量（重or不重）+体积（大or不大）+投放目的地（具体宿舍楼号以及单元门号）”
-");
+    return res.reply("亲，别着急，“THU咻不”来帮您啦！快快回复您快递的基本信息吧：“所取快递重量（重or不重）+体积（大or不大）+投放目的地（具体宿舍楼号以及单元门号）”");
   }
   if (input === '提供帮助') {
     return res.reply("哇塞！亲，您真是一个乐于助人的好青年！\n欢迎使用“THU咻不”！麻烦您回复可以提供帮助的时间区间，格式例如7:00-8:00或者13:00-16:00，您辛苦啦！我们将尽快为您匹配代取快递啦！");
@@ -71,6 +68,9 @@ exports.reply = wechat(config.mp, wechat.text(function (message, req, res) {
   };
   if (input.length < 2) {
     return res.reply('能不能跟我说完整的句子呢～');
+  }
+  else{
+    return res.reply('抱歉，我听不懂！')
   }
   var data = alpha.search(input);
   var from = message.FromUserName;
