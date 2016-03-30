@@ -4,6 +4,7 @@ var connect = require('connect');
 var config = require('./config');
 var mp = require('./controllers/wechat_mp');
 var corp = require('wechat-enterprise');
+var wechat = require('wechat')
 
 var url = require("url");
 var crypto = require("crypto");
@@ -41,18 +42,6 @@ function validateToken(req,res){
   }
 }
 
-/*
-var API = wechat.API  
-  , appid = 'wxd34aa823b8e85243'  
-  , secret = 'f6366cbad50f6bb6b4fbc31c262de298';  
-var api = new API(appid, secret);
-var menu = fs.readFileSync('./menu.json');
-if (menu){
-  menu = JSON.parse(menu);
-  api.createMenu(menu, function(err, result){})
-}
-*/ 
-
 var app = connect();
 connect.logger.format('home', ':remote-addr :response-time - [:date] ":method :url HTTP/:http-version" :status :res[content-length] ":referrer" ":user-agent" :res[content-length]');
 app.use(connect.logger({
@@ -63,6 +52,15 @@ app.use(connect.query());
 app.use('/assets', connect.static(__dirname + '/assets', { maxAge: 86400000 }));
 app.use(connect.cookieParser());
 app.use(connect.session({secret: config.secret}));
+
+
+var API = wechat.API, appid = 'wxd34aa823b8e85243', secret = 'f6366cbad50f6bb6b4fbc31c262de298';  
+var api = new API(appid, secret);
+var menu = fs.readFileSync('./menu.json');
+if (menu) {
+  menu = JSON.parse(menu);
+}
+api.createMenu(menu, function(err, result){})
 
 app.use('/wechat/callback', mp.callback);
 app.use('/wechat', mp.reply);
