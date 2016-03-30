@@ -96,7 +96,7 @@ exports.reply = wechat(config.mp, wechat.text(function (message, req, res) {
     res.reply('啊哈，欢迎关注“THU咻不”！:)\n有了我们你就再也不怕没时间取快递啦！你也通过可以帮助别人来赚笔小钱哦！快快点击下方的“我要注册”加入我们吧！');
   } else if (message.Event === 'unsubscribe') {
     res.reply('Bye!');
-  } else if (message.Event === 'click') {
+  } else if (message.Event === 'CLICK') {
     if (message.EventKey === 'V100') {
       return res.reply("为了快递们的安全，我们需要验证您的身份，请回复我们以下信息：“你的姓名＋院系＋学号＋手机号”，并把您的学生证照片发给我们，我们会好好保护您的隐私的！");
     }
