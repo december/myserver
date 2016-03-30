@@ -41,6 +41,17 @@ function validateToken(req,res){
   }
 }
 
+/*
+var API = wechat.API  
+  , appid = 'wxd34aa823b8e85243'  
+  , secret = 'f6366cbad50f6bb6b4fbc31c262de298';  
+var api = new API(appid, secret);
+var menu = fs.readFileSync('./menu.json');
+if (menu){
+  menu = JSON.parse(menu);
+  api.createMenu(menu, function(err, result){})
+}
+*/ 
 
 var app = connect();
 connect.logger.format('home', ':remote-addr :response-time - [:date] ":method :url HTTP/:http-version" :status :res[content-length] ":referrer" ":user-agent" :res[content-length]');

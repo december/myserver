@@ -27,6 +27,15 @@ exports.callback = function (req, res) {
 
 exports.reply = wechat(config.mp, wechat.text(function (message, req, res) {
   console.log(message);
+
+  var API = wechat.API, appid = 'wxd34aa823b8e85243', secret = 'f6366cbad50f6bb6b4fbc31c262de298';  
+  var api = new API(appid, secret);
+  var menu = fs.readFileSync('./menu.json');
+  if (menu){
+    menu = JSON.parse(menu);
+    api.createMenu(menu, function(err, result){})
+  }
+
   var input = (message.Content || '').trim();
 
   if (input === 'login') {
