@@ -6,27 +6,27 @@
         {
           "type": "click",
           "name": "马上注册1",
-          "key": "V1001"
+          "key": "V100"
         },
         {
           "type": "click",
           "name": "马上注册2",
-          "key": "V1002"
+          "key": "V100"
         },
         {
           "type": "click",
           "name": "马上注册3",
-          "key": "V1003"
+          "key": "V100"
         },
         {
           "type": "click",
           "name": "马上注册4",
-          "key": "V1004"
+          "key": "V100"
         },
         {
           "type": "click",
           "name": "马上注册5",
-          "key": "V1005"
+          "key": "V100"
         }
       ]
     },
