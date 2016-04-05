@@ -1,44 +1,54 @@
 {
   "button": [
     {
+      "type": "click",
       "name": "马上注册",
+      "key": "SighIn"
+    },
+    {
+      "name": "需要帮助",
       "sub_button": [
         {
           "type": "click",
-          "name": "马上注册1",
-          "key": "V100"
+          "name": "发布需求",
+          "key": "NeedHelp"
         },
         {
           "type": "click",
-          "name": "马上注册2",
-          "key": "V100"
+          "name": "支付完成",
+          "key": "Payed"
         },
         {
           "type": "click",
-          "name": "马上注册3",
-          "key": "V100"
+          "name": "签收确认",
+          "key": "Checked"
         },
-        {
-          "type": "click",
-          "name": "马上注册4",
-          "key": "V100"
-        },
-        {
-          "type": "click",
-          "name": "马上注册5",
-          "key": "V100"
-        }
       ]
     },
     {
-      "type": "click",
-      "name": "需要帮助",
-      "key": "Need Help"
-    },
-    {
-      "type": "click",
       "name": "提供帮助",
-      "key": "Provide Help"
+      "sub_button": [
+        {
+          "type": "click",
+          "name": "代取时间",
+          "key": "OfferHelp"
+        },
+        {
+          "type": "click",
+          "name": "取消空闲",
+          "key": "Cancel"
+        },
+        {
+          "type": "click",
+          "name": "确认投放",
+          "key": "Finished"
+        },
+        {
+          "type": "click",
+          "name": "我的钱包",
+          "key": "Wallet"
+        }
+      ]
     }
   ]
 }
