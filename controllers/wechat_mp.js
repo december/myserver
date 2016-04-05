@@ -255,10 +255,9 @@ exports.reply = wechat(config.mp, wechat.text(function (message, req, res) {
     }
     rstring = "亲你久等啦！根据您的快递情况，价格为"+price.toString()+"元哦～～是不是超划算？如果您愿意接受，请扫描下面的二维码进行支付，并在支付完成后点击“支付完成”菜单项。";
     res.reply([{
-      title: '登陆页面',
-      description: '去登陆',
+      title: '付款消息',
+      description: rstring,
       picurl: config.domain + '/assets/charge'+price.toString()+'.jpg',
-      url: config.domain + '/login'
     }]);
     return;
     //发布付款二维码
