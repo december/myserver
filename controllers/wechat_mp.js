@@ -153,6 +153,25 @@ exports.reply = wechat(config.mp, wechat.text(function (message, req, res) {
     }
     return res.reply("Sorry亲，您尚未注册！");
   }
+  if (input === 'reload2016') {
+    var glist = [];
+    fs.readFile('userdata', function(err, data) {  //读取用户信息
+    if (err) {
+      console.error(err);
+    }
+    else {
+      //console.log(data);
+      var userinfo = data.toString().split('\n');
+      var usernum = userinfo.length - 1;
+      console.log(usernum);
+      for (var i = 0;i < usernum;i++) {
+        var unitinfo = userinfo[i].split('+');
+        glist.push({id:unitinfo[0], name:unitinfo[1], major:unitinfo[2], snum:unitinfo[3], pnum:unitinfo[4], checked:unitinfo[5], sbegin:unitinfo[6], send:unitinfo[7], charge:unitinfo[8], remain:unitinfo[9]});
+      }
+    }
+    return res.reply('已重新加载列表。');
+  })
+  }
   if (input === '刘建平') {
     return res.reply("什么时候发演出的票！");
   }
@@ -257,6 +276,7 @@ exports.reply = wechat(config.mp, wechat.text(function (message, req, res) {
           var temp = {};
           temp.id = glist[item].id;
           temp.price = price;
+          temp.settime = new Date();
           temp.flag = 0;
           hlist.ctname = temp;
           found = 1;
@@ -271,6 +291,7 @@ exports.reply = wechat(config.mp, wechat.text(function (message, req, res) {
       var item = glist[0];
       temp.id = item.id;
       temp.price = price;
+      temp.settime = new Date();
       temp.flag = 0;
       hlist.ctname = temp;
     }
