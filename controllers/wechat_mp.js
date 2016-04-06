@@ -17,8 +17,8 @@ fs.readFile('userdata', function(err, data) {  //读取用户信息
     console.error(err);
   }
   else {
-    console.log(data);
-    var userinfo = data.split('\n');
+    //console.log(data);
+    var userinfo = data.toString().split('\n');
     var usernum = userinfo.length - 1;
     console.log(usernum);
     for (var i = 0;i < usernum;i++) {
