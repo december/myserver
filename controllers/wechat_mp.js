@@ -323,11 +323,11 @@ exports.reply = wechat(config.mp, wechat.text(function (message, req, res) {
     if (message.EventKey === 'SignIn') {
       //get 用户信息
       var ctname = message.FromUserName;
-      console.log(ctname);
-      console.log(typeof ctname);
+      //console.log(ctname);
+      //console.log(typeof ctname);
       for (var item in glist) {
-        console.log(glist[item].id);
-        console.log(typeof glist[item].id);
+        console.log(glist[item].id, ctname, glist[item].id.length, ctname.length);
+        //console.log(typeof glist[item].id);
         console.log(glist[item].id == ctname);
         if (glist[item].id == ctname) {
           if (glist[item].checked != 0)
