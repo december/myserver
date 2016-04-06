@@ -307,7 +307,7 @@ exports.reply = wechat(config.mp, wechat.text(function (message, req, res) {
     if (message.EventKey === 'SignIn') {
       //get 用户信息
       var ctname = message.FromUserName;
-      console.log(ctname+' SignIn');
+      //console.log(ctname+' SignIn');
       for (var item in glist) {
         if (item[id] === ctname) {
           if (item[checked] != 0)
