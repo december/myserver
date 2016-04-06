@@ -328,6 +328,7 @@ exports.reply = wechat(config.mp, wechat.text(function (message, req, res) {
       for (var item in glist) {
         console.log(glist[item].id);
         console.log(typeof glist[item].id);
+        console.log(glist[item].id == ctname);
         if (glist[item].id == ctname) {
           if (glist[item].checked != 0)
             return res.reply("您已注册并通过审核！");
