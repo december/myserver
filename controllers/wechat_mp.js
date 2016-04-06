@@ -136,7 +136,7 @@ exports.reply = wechat(config.mp, wechat.text(function (message, req, res) {
   if (input === '提现') {
     var ctname = message.FromUserName;
     for (var item in glist) {
-      if (glist[item].id === ctname) {
+      if (glist[item].id == ctname) {
         if (glist[item].remain < 5) 
           return res.reply("Sorry亲，您的余额不足五元，暂时无法提现。");
         else
@@ -376,6 +376,7 @@ exports.reply = wechat(config.mp, wechat.text(function (message, req, res) {
       var targetid = hlist.ctname.id;
       for (var item in glist) {
         if (glist[item].id == targetid) {
+          console.log(glist[item].remain+' '+price.toString());
           glist[item].remain = (parseInt(glist[item].remain) + price).toString();
           break;
         }
