@@ -301,7 +301,7 @@ exports.reply = wechat(config.mp, wechat.text(function (message, req, res) {
       else {
         //保存图片
         var picurl = message.PicUrl;
-        var picname = 'userphoto/' + ctname + '.png';
+        var picname = 'userphoto/' + glist[item].name + '.png';
         request(picurl).pipe(fs.createWriteStream(picname));
         return res.reply('恭喜您注册成功！我们会尽快为您审核！');
       }
