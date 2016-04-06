@@ -12,7 +12,7 @@ var oauth = new wechat.OAuth(config.appid, config.appsecret);
 
 var hlist = {};
 var glist = [];
-fs.readFile('userdata', function(err, data)) {  //读取用户信息
+fs.readFile('userdata', function(err, data) {  //读取用户信息
   if (err) {
     console.error(err);
   }
@@ -25,7 +25,7 @@ fs.readFile('userdata', function(err, data)) {  //读取用户信息
       glist.push({id:unitinfo[0], name:unitinfo[1], major:unitinfo[2], snum:unitinfo[3], pnum:unitinfo[4], checked:unitinfo[5], sbegin:unitinfo[6], send:unitinfo[7], charge:unitinfo[8], remain:unitinfo[9]});
     }
   }
-}
+})
 
 var List = require('wechat').List;
 List.add('view', [
