@@ -207,7 +207,6 @@ exports.reply = wechat(config.mp, wechat.text(function (message, req, res) {
     var tr = rightTime(timeinfo[1].split(':'));
     if (timeresult > tr)
       timeresult = tr;
-    var timeresult = min(rightTime(timeinfo[0].split(':')), rightTime(timeinfo[1].split(':')));
     if (timeresult == 0)
       return res.reply('您输入的时间格式不正确，请输入8:00-18:30之间的时间段。');
     if (timeresult == 1)
