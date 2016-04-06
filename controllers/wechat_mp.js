@@ -323,9 +323,11 @@ exports.reply = wechat(config.mp, wechat.text(function (message, req, res) {
     if (message.EventKey === 'SignIn') {
       //get 用户信息
       var ctname = message.FromUserName;
-      console.log(ctname+' SignIn');
+      console.log(ctname);
+      console.log(typeof ctname);
       for (var item in glist) {
         console.log(glist[item].id);
+        console.log(typeof glist[item].id);
         if (glist[item].id == ctname) {
           if (glist[item].checked != 0)
             return res.reply("您已注册并通过审核！");
@@ -360,7 +362,12 @@ exports.reply = wechat(config.mp, wechat.text(function (message, req, res) {
       return res.reply("Sorry亲，您尚未注册！");
     }
     if (message.EventKey === 'NeedHelp') {
-      return res.reply("亲，别着急，“THU咻不”来帮您啦！快快回复您快递的基本信息吧：“*所取快递重量（重or不重）+体积（大or不大）+投放目的地（具体宿舍楼号以及单元门号）+您要求的最晚领取时间（例如18:00）”");
+      var ctname = message.FromUserName;
+      for (var item in glist) {
+        if (glist[item].id == ctname)
+          return res.reply("亲，别着急，“THU咻不”来帮您啦！快快回复您快递的基本信息吧：“*所取快递重量（重or不重）+体积（大or不大）+投放目的地（具体宿舍楼号以及单元门号）+您要求的最晚领取时间（例如18:00）”");
+      }
+      return res.reply("Sorry亲，您尚未注册，无法提供代取快递服务！");
     }
     if (message.EventKey === 'Payed') {
       var ctname = message.FromUserName;
@@ -401,16 +408,16 @@ exports.reply = wechat(config.mp, wechat.text(function (message, req, res) {
     if (message.EventKey === 'OfferHelp') {
       var ctname = message.FromUserName;
       for (var item in glist) {
-        if (glist[item].id === ctname) {
+        if (glist[item].id == ctname) {
           if (glist[item].checked != 0) {
             //写入offer time与金额
             return res.reply("哇塞！亲，您真是一个乐于助人的好青年！\n欢迎使用“THU咻不”！麻烦您回复可以提供帮助的时间区间，格式例如“@13:00-16:00“，您辛苦啦！我们将尽快为您匹配代取快递啦！");
           }
           else
-            return res.reply("抱歉，由于我们尚未审核您的注册申请，您暂时无法帮人取快递，我们会尽快为您审核！");
+            return res.reply("Sorry亲，由于我们尚未审核您的注册申请，您暂时无法帮人取快递，我们会尽快为您审核！");
         }
       }
-      return res.reply("抱歉，您尚未注册，无法提供取快递服务！");
+      return res.reply("Sorry亲，您尚未注册，无法提供取快递服务！");
       }
     } else {
     res.reply('暂未支持! Coming soon!');
