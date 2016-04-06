@@ -136,8 +136,8 @@ exports.reply = wechat(config.mp, wechat.text(function (message, req, res) {
   if (input === '提现') {
     var ctname = message.FromUserName;
     for (var item in glist) {
-      if (item[id] === ctname) {
-        if (item[remain] < 5) 
+      if (item.id === ctname) {
+        if (item.remain < 5) 
           return res.reply("Sorry亲，您的余额不足五元，暂时无法提现。");
         else
           return res.reply([{
@@ -170,7 +170,7 @@ exports.reply = wechat(config.mp, wechat.text(function (message, req, res) {
   if (input.indexOf('#') == 0) { //注册信息
     var ctname = message.FromUserName;
     for (var item in glist) {
-      if (item[id] === ctname) {
+      if (item.id === ctname) {
         return res.reply('Sorry亲，您已经注册过了！');
       }
     }
@@ -200,9 +200,9 @@ exports.reply = wechat(config.mp, wechat.text(function (message, req, res) {
       return res.reply('空闲时间开始与结束时间均不能早于当前时间，请重新输入。');
     var ctname = message.FromUserName;
     for (var item in glist) {
-      if (item[id] === ctname) {
-        item[sbegin] = timeinfo[0];
-        item[send] = timeinfo[1];
+      if (item.id === ctname) {
+        item.sbegin = timeinfo[0];
+        item.send = timeinfo[1];
       }
     }
     return res.reply('已存储您的空闲时间信息，匹配成功时我们会将您的姓名、院系和手机号码提供给需要取快递的同学，由TA来联系您，请保持手机畅通！');
@@ -224,22 +224,22 @@ exports.reply = wechat(config.mp, wechat.text(function (message, req, res) {
     var ctname = message.FromUserName;
     var found = 0;
     for (var item in glist) {
-      if (item[id] != ctname && parseInt(item[sbegin]) != 0) {
+      if (item.id != ctname && parseInt(item[sbegin]) != 0) {
         var flag = judgeTime(item[send], item[sbegin], info[3]);
         if (flag == 0) {
-          item[sbegin] = 0;
-          item[send] = 0;
+          item.sbegin = 0;
+          item.send = 0;
         }
         if (flag == 1) {
-          item[sbegin] = 0;
-          item[send] = 0;
+          item.sbegin = 0;
+          item.send = 0;
         }
         if (flag == 2) {
           var temp = {};
-          temp[id] = item[id];
-          temp[price] = item[price];
-          temp[flag] = 0;
-          hlist[ctname] = temp;
+          temp.id = item.id;
+          temp.price = item.price;
+          temp.flag = 0;
+          hlist.ctname = temp;
           found = 1;
           break;
         }
@@ -250,10 +250,10 @@ exports.reply = wechat(config.mp, wechat.text(function (message, req, res) {
       //没找到合适的用户，记录默认用户信息
       var temp = {};
       var item = glist[0];
-      temp[id] = item[id];
-      temp[price] = item[price];
-      temp[flag] = 0;
-      hlist[ctname] = temp;
+      temp.id = item.id;
+      temp.price = item.price;
+      temp.flag = 0;
+      hlist.ctname = temp;
     }
     rstring = "亲你久等啦！根据您的快递情况，价格为"+price.toString()+"元哦～～是不是超划算？如果您愿意接受，请扫描下面的二维码进行支付，并在支付完成后点击“支付完成”菜单项。";
     res.reply([{
@@ -275,8 +275,8 @@ exports.reply = wechat(config.mp, wechat.text(function (message, req, res) {
   console.log(message);
   var ctname = message.FromUserName;
   for (var item in glist) {
-    if (item[id] === ctname) {
-      if (item[checked] != 0)
+    if (item.id === ctname) {
+      if (item.checked != 0)
         return res.reply('您已注册且已通过审核！');
       else
         //保存图片
@@ -309,8 +309,8 @@ exports.reply = wechat(config.mp, wechat.text(function (message, req, res) {
       var ctname = message.FromUserName;
       //console.log(ctname+' SignIn');
       for (var item in glist) {
-        if (item[id] === ctname) {
-          if (item[checked] != 0)
+        if (item.id === ctname) {
+          if (item.checked != 0)
             return res.reply("您已注册并通过审核！");
           else
             return res.reply("您已提交注册申请，请耐心等待审核！");
@@ -321,9 +321,9 @@ exports.reply = wechat(config.mp, wechat.text(function (message, req, res) {
     if (message.EventKey === 'Cancel') {
       var ctname = message.FromUserName;
       for (var item in glist) {
-        if (item[id] == ctname) {
-          item[send] = 0;
-          item[sbegin] = 0;
+        if (item.id == ctname) {
+          item.send = 0;
+          item.sbegin = 0;
           return res.reply("已将您的可代取时间段清空～");
         }
       }
@@ -335,7 +335,7 @@ exports.reply = wechat(config.mp, wechat.text(function (message, req, res) {
     if (message.EventKey === 'Wallet') {
       var ctname = message.FromUserName;
       for (var item in glist) {
-        if (item[id] == ctname) {
+        if (item.id == ctname) {
           var rstring = "亲，您的钱包已累计金额达到"+item[remain]+"元，好厉害！\n您可以回复后台“提现“来提取现金，不过我们的提现金额是固定的哦，只有满5元时才可以提现！";
           return res.reply(rstring);
         }
@@ -347,13 +347,13 @@ exports.reply = wechat(config.mp, wechat.text(function (message, req, res) {
     }
     if (message.EventKey === 'Payed') {
       var ctname = message.FromUserName;
-      if (!hlist[ctname] || hlist[ctname][flag] == 1)
+      if (!hlist.ctname || hlist.ctname.flag == 1)
         return res.reply("Sorry亲，您当前似乎没有需要我们取的快递～");
-      var targetid = hlist[ctname][id];
+      var targetid = hlist.ctname.id;
       var targetinfo = '';
       for (var item in glist) {
-        if (item[id] == targetid) {
-          targetinfo = item[name] + ' ' + item[major] + ' ' + item[pnum] + '\n';
+        if (item.id == targetid) {
+          targetinfo = item.name + ' ' + item.major + ' ' + item.pnum + '\n';
           break;
         }
       }
@@ -362,18 +362,18 @@ exports.reply = wechat(config.mp, wechat.text(function (message, req, res) {
     }
     if (message.EventKey === 'Checked') {
       var ctname = message.FromUserName;
-      if (!hlist[ctname] || hlist[ctname][flag] == 1)
+      if (!hlist.ctname || hlist.ctname.flag == 1)
         return res.reply("Sorry亲，您当前似乎没有需要确认收到的快递～");
-      hlist[ctname][flag] = 1;
-      var price = hlist[ctname][price];
+      hlist.ctname.flag = 1;
+      var price = hlist.ctname.price;
       if (price == 5)
         price -= 2;
       else 
         price -= 1;
-      var targetid = hlist[ctname][id];
+      var targetid = hlist.ctname.id;
       for (var item in glist) {
-        if (item[id] == targetid) {
-          item[remain] += price;
+        if (item.id == targetid) {
+          item.remain += price;
           break;
         }
       }
@@ -382,8 +382,8 @@ exports.reply = wechat(config.mp, wechat.text(function (message, req, res) {
     if (message.EventKey === 'OfferHelp') {
       var ctname = message.FromUserName;
       for (var item in glist) {
-        if (item[id] === ctname) {
-          if (item[checked] != 0) {
+        if (item.id === ctname) {
+          if (item.checked != 0) {
             //写入offer time与金额
             return res.reply("哇塞！亲，您真是一个乐于助人的好青年！\n欢迎使用“THU咻不”！麻烦您回复可以提供帮助的时间区间，格式例如“@13:00-16:00“，您辛苦啦！我们将尽快为您匹配代取快递啦！");
           }
