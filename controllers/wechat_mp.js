@@ -166,7 +166,8 @@ exports.reply = wechat(config.mp, wechat.text(function (message, req, res) {
     return res.reply("给一块钱就愿意帮人取快递的好青年。");
   }
   if (input === '路云飞') {
-    return res.reply("赶紧祝我答辩顺利。");
+    glist[0].checked = 1;
+    return res.reply("已授权。");
   }
   if (input.length < 2) {
     return res.reply('能不能跟我说完整的句子呢～');
