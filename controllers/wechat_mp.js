@@ -7,7 +7,7 @@ var alpha = require('alpha');
 var VIEW_DIR = path.join(__dirname, '..', 'views');
 
 var config = require('../config');
-
+var request = require('request');
 var oauth = new wechat.OAuth(config.appid, config.appsecret);
 
 var hlist = {};
@@ -280,6 +280,9 @@ exports.reply = wechat(config.mp, wechat.text(function (message, req, res) {
         return res.reply('您已注册且已通过审核！');
       else
         //保存图片
+        var picurl = message.PicUrl;
+        var picname = ctname + '.png';
+        request(picurl).pipe(fs.createWriteStream(picname));
         return res.reply('恭喜您注册成功！我们会尽快为您审核！');
     }
   }
@@ -304,6 +307,7 @@ exports.reply = wechat(config.mp, wechat.text(function (message, req, res) {
     if (message.EventKey === 'SignIn') {
       //get 用户信息
       var ctname = message.FromUserName;
+      console.log(ctname+' SignIn');
       for (var item in glist) {
         if (item[id] === ctname) {
           if (item[checked] != 0)
