@@ -172,6 +172,11 @@ exports.reply = wechat(config.mp, wechat.text(function (message, req, res) {
   if (input.length < 2) {
     return res.reply('能不能跟我说完整的句子呢～');
   }
+  if (input === 'secret code') {
+    console.log(hlist);
+    console.log(glist);
+    return res.reply('已打印当前状态。');
+  }
   if (input.indexOf('#') == 0) { //注册信息
     var ctname = message.FromUserName;
     for (var item in glist) {
