@@ -401,10 +401,19 @@ exports.reply = wechat(config.mp, wechat.text(function (message, req, res) {
         return res.reply("Sorry亲，您当前似乎没有需要我们取的快递～");
       var targetid = hlist.ctname.id;
       var targetinfo = '';
+      var myflag = 0;
       for (var item in glist) {
+        if (glist[item].id == ctname) {
+          glist[item].charge = (parseInt(glist[item].charge) + hlist.ctname.price).toString();
+          myflag += 1;
+          if (myflag >= 2)
+            break;
+        }
         if (glist[item].id == targetid) {
           targetinfo = glist[item].name + ' ' + glist[item].major + ' ' + glist[item].pnum + '\n';
-          break;
+          myflag += 1;
+          if (myflag >= 2)
+            break;
         }
       }
       var rstring = "哈哈哈，匹配成功啦！帮您取快递的学生信息如下：\n" + targetinfo + "请按上面的手机号联系帮您取快递的同学吧～收到快递后一定记得点击”签收确认“菜单项进行确认啊～";
