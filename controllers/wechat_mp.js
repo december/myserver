@@ -198,6 +198,10 @@ exports.reply = wechat(config.mp, wechat.text(function (message, req, res) {
     //get 系统时间，检验时间段是否合法
 
     var timeinfo = input.substring(1).split('-');
+    var timeresult = rightTime(timeinfo[0].split(':'));
+    var tr = rightTime(timeinfo[1].split(':'));
+    if (timeresult > tr)
+      timeresult = tr;
     var timeresult = min(rightTime(timeinfo[0].split(':')), rightTime(timeinfo[1].split(':')));
     if (timeresult == 0)
       return res.reply('您输入的时间格式不正确，请输入8:00-18:30之间的时间段。');
@@ -262,7 +266,7 @@ exports.reply = wechat(config.mp, wechat.text(function (message, req, res) {
       var temp = {};
       var item = glist[0];
       temp.id = item.id;
-      temp.price = item.price;
+      temp.price = price;
       temp.flag = 0;
       hlist.ctname = temp;
     }
