@@ -41,7 +41,7 @@ exports.callback = function (req, res) {
   });
 };
 
-function rightTime(timeinfo):
+function rightTime(timeinfo)
 {
   timeinfo[0] = parseInt(timeinfo[0]);
   timeinfo[1] = parseInt(timeinfo[1]);
@@ -59,7 +59,7 @@ function rightTime(timeinfo):
   return 3;
 }
 
-function busyTime(timeString):
+function busyTime(timeString)
 {
   var timeinfo = timeString.split(':');
   timeinfo[0] = parseInt(timeinfo[0]);
@@ -78,7 +78,7 @@ function busyTime(timeString):
   return 4;
 }
 
-function judgeTime(spareend, sparebegin, latest):
+function judgeTime(spareend, sparebegin, latest)
 {
   var timeinfo = spareend.split(':');
   timeinfo[0] = parseInt(timeinfo[0]);
