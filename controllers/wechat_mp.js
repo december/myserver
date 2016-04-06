@@ -177,12 +177,12 @@ exports.reply = wechat(config.mp, wechat.text(function (message, req, res) {
     var infoarray = info.split('+')
     glist.push({id:ctname, name:infoarray[0], major:infoarray[1], snum:infoarray[2], pnum:infoarray[3], checked:0, sbegin:0, send:0, charge:0, remain:0});
     info = ctname + '+' + info + '+0+0+0+0+0\n'
-    fs.appendFile('userdata', info, function(err)) {
+    fs.appendFile('userdata', info, function(err) {
       if (err) 
         console.log("FAIL:" + err);
       else
         console.log("信息已写入");
-    }
+    })
     return res.reply('已存储您的信息，接下来请上传您的学生卡照片！')
   }
   if (input.indexOf('@') == 0) {
