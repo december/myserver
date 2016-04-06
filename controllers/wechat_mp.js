@@ -376,7 +376,7 @@ exports.reply = wechat(config.mp, wechat.text(function (message, req, res) {
       var targetid = hlist.ctname.id;
       for (var item in glist) {
         if (glist[item].id == targetid) {
-          glist[item].remain += price;
+          glist[item].remain = (parseInt(glist[item].remain) + price).toString();
           break;
         }
       }
