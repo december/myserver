@@ -162,7 +162,7 @@ exports.reply = wechat(config.mp, wechat.text(function (message, req, res) {
     return res.reply("给一块钱就愿意帮人取快递的好青年。");
   }
   if (input === '路云飞') {
-    return res.reply("赶紧祝我答辩顺利。")
+    return res.reply("赶紧祝我答辩顺利。");
   }
   if (input.length < 2) {
     return res.reply('能不能跟我说完整的句子呢～');
@@ -170,22 +170,23 @@ exports.reply = wechat(config.mp, wechat.text(function (message, req, res) {
   if (input.indexOf('#') == 0) { //注册信息
     var ctname = message.FromUserName;
     for (var item in glist) {
+      console.log(item.id);
       if (item.id === ctname) {
         return res.reply('Sorry亲，您已经注册过了！');
       }
     }
     //存储用户信息
-    var info = input.substring(1)
-    var infoarray = info.split('+')
+    var info = input.substring(1);
+    var infoarray = info.split('+');
     glist.push({id:ctname, name:infoarray[0], major:infoarray[1], snum:infoarray[2], pnum:infoarray[3], checked:0, sbegin:0, send:0, charge:0, remain:0});
-    info = ctname + '+' + info + '+0+0+0+0+0\n'
+    info = ctname + '+' + info + '+0+0+0+0+0\n';
     fs.appendFile('userdata', info, function(err) {
       if (err) 
         console.log("FAIL:" + err);
       else
         console.log("信息已写入");
     })
-    return res.reply('已存储您的信息，接下来请上传您的学生卡照片！')
+    return res.reply('已存储您的信息，接下来请上传您的学生卡照片！');
   }
   if (input.indexOf('@') == 0) {
     //get 系统时间，检验时间段是否合法
