@@ -68,9 +68,13 @@ function busyTime(timeString)
   timeinfo[1] = parseInt(timeinfo[1]);
   if (timeinfo[0] < 0 || timeinfo[0] > 23 || timeinfo[1] < 0 || timeinfo[1] > 59)
     return 0;
+  if (timeinfo[0] < 8)
+    return -1;
   var timeint = timeinfo[0] * 100 + timeinfo[1];
   var now = new Date();
   var nowint = now.getHours() * 100 + now.getMinutes();
+  if (nowint > 1830)
+    return -2;
   if (timeint < nowint)
     return 1;
   if (timeint >= 1130 && timeint <= 1330 && nowint >= 1130 && nowint <= 1130)
@@ -215,6 +219,10 @@ exports.reply = wechat(config.mp, wechat.text(function (message, req, res) {
     var price = 3;
     var info = input.substring(1).split('+');
     var timeresult = busyTime(info[3]);
+    if (timeresult == -1)
+      return res.reply('Sorry亲，您填写的最晚领取时间早于快递点上班时间，是不是填错了呢？');
+    if (timeresult == -2)
+      return res.reply('Sorry亲，现在太晚啦，快递点也下班了，请明天再发布需求吧～');
     if (timeresult == 0)
       return res.reply('Sorry亲，您填写的最晚领取时间格式有误！');
     if (timeresult == 1)
@@ -239,7 +247,7 @@ exports.reply = wechat(config.mp, wechat.text(function (message, req, res) {
         if (flag == 2) {
           var temp = {};
           temp.id = glist[item].id;
-          temp.price = glist[item].price;
+          temp.price = price;
           temp.flag = 0;
           hlist.ctname = temp;
           found = 1;
