@@ -17,6 +17,7 @@ fs.readFile('userdata', function(err, data) {  //读取用户信息
     console.error(err);
   }
   else {
+    console.log(data);
     var userinfo = data.split('\n');
     var usernum = userinfo.length - 1;
     console.log(usernum);
@@ -25,6 +26,7 @@ fs.readFile('userdata', function(err, data) {  //读取用户信息
       glist.push({id:unitinfo[0], name:unitinfo[1], major:unitinfo[2], snum:unitinfo[3], pnum:unitinfo[4], checked:unitinfo[5], sbegin:unitinfo[6], send:unitinfo[7], charge:unitinfo[8], remain:unitinfo[9]});
     }
   }
+  return;
 })
 
 var List = require('wechat').List;
