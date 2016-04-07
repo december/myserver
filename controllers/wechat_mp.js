@@ -153,6 +153,21 @@ exports.reply = wechat(config.mp, wechat.text(function (message, req, res) {
     }
     return res.reply("Sorry亲，您尚未注册！");
   }
+  if (input === 'savedata2016') {
+    var total = '';
+    for (var item in glist) {
+      var unit = '';
+      for (var key in item)
+        unit += item[key] + '+';
+      total += unit + '\n';
+    }
+    var writeBuffer = new Buffer(total);
+    fs.writeFile('userdata', writeBuffer, function(err) {
+      if (err)
+        console.log(err);
+    })
+    return res.reply("已存入文件。");
+  }
   if (input === 'reload2016') {
     var glist = [];
     fs.readFile('userdata', function(err, data) {  //读取用户信息
