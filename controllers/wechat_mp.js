@@ -145,9 +145,9 @@ exports.reply = wechat(config.mp, wechat.text(function (message, req, res) {
           return res.reply("Sorry亲，您的余额不足五元，暂时无法提现。");
         else
           return res.reply([{
-                    title: '收款二维码',
-                    description: '扫一扫二维码提现5元',
-                    picurl: config.domain + '/assets/paycode.jpg',
+                    title: '客服账号',
+                    description: '请您扫码添加我们的客服微信号，我们的工作人员会将您的“好人费”转给您哦！！',
+                    picurl: config.domain + '/assets/servecode.jpg',
                   }]);
       }
     }
