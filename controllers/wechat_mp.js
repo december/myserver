@@ -25,6 +25,7 @@ fs.readFile('userdata', function(err, data) {  //读取用户信息
       var unitinfo = userinfo[i].split('+');
       glist.push({id:unitinfo[0], name:unitinfo[1], major:unitinfo[2], snum:unitinfo[3], pnum:unitinfo[4], checked:unitinfo[5], sbegin:unitinfo[6], send:unitinfo[7], charge:unitinfo[8], remain:unitinfo[9]});
     }
+	console.log(glist);
   }
   return;
 })
@@ -169,7 +170,7 @@ exports.reply = wechat(config.mp, wechat.text(function (message, req, res) {
     return res.reply("已存入文件。");
   }
   if (input === 'reload2016') {
-    var glist = [];
+    glist = [];
     fs.readFile('userdata', function(err, data) {  //读取用户信息
     if (err) {
       console.error(err);
@@ -184,8 +185,8 @@ exports.reply = wechat(config.mp, wechat.text(function (message, req, res) {
         glist.push({id:unitinfo[0], name:unitinfo[1], major:unitinfo[2], snum:unitinfo[3], pnum:unitinfo[4], checked:unitinfo[5], sbegin:unitinfo[6], send:unitinfo[7], charge:unitinfo[8], remain:unitinfo[9]});
       }
     }
+	})
     return res.reply('已重新加载列表。');
-  })
   }
   if (input === '刘建平') {
     return res.reply("什么时候发演出的票！");
