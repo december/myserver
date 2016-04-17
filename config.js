@@ -1,6 +1,7 @@
 module.exports = {
   secret: 'secret',
   port: 80,
+  domain: 'http://121.42.45.25', 
   corp: {
     token: 'thuber2016',
     encodingAESKey: 'wjsu9U1frpPXcruhstuH0bB9alrHKBKEGwrw0xX68AC',

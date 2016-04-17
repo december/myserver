@@ -149,6 +149,7 @@ exports.reply = wechat(config.mp, wechat.text(function (message, req, res) {
                     title: '客服账号',
                     description: '请您扫码添加我们的客服微信号，我们的工作人员会将您的“好人费”转给您哦！！',
                     picurl: config.domain + '/assets/servecode.jpg',
+					url: config.domain + '/assets/servecode.jpg'
                   }]);
       }
     }
@@ -158,8 +159,13 @@ exports.reply = wechat(config.mp, wechat.text(function (message, req, res) {
     var total = '';
     for (var item in glist) {
       var unit = '';
-      for (var key in item)
-        unit += item[key] + '+';
+	  console.log(item);
+      for (var key in glist[item])
+	  {
+        unit += glist[item][key];
+		if (key != 'remain')
+			unit += '+';
+	  }
       total += unit + '\n';
     }
     var writeBuffer = new Buffer(total);
@@ -312,10 +318,13 @@ exports.reply = wechat(config.mp, wechat.text(function (message, req, res) {
       hlist.ctname = temp;
     }
     rstring = "亲你久等啦！根据您的快递情况，价格为"+price.toString()+"元哦～～是不是超划算？如果您愿意接受，请扫描下面的二维码进行支付，并在支付完成后点击“支付完成”菜单项。";
-    res.reply([{
+    nstring = config.domain + '/assets/charge' + price.toString() + '.jpg';
+	console.log(nstring);
+	res.reply([{
       title: '付款消息',
       description: rstring,
-      picurl: config.domain + '/assets/charge'+price.toString()+'.jpg',
+      picurl: nstring,
+	  url:nstring
     }]);
     return;
     //发布付款二维码
